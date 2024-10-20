@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserProfilesTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,19 @@ class CreateUserProfilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_profiles', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('company_name')->nullable();
-            $table->string('street_addr_1')->nullable();
-            $table->string('street_addr_2')->nullable();
+            $table->string('username')->unique();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email')->unique();
             $table->string('phone_number')->nullable();
-            $table->string('alt_phone_number')->nullable();
-            $table->string('country')->nullable();
-            $table->string('state')->nullable();
-            $table->string('city')->nullable();
-            $table->bigInteger('pin_code')->nullable();
-            $table->string('facebook_url')->nullable();
-            $table->string('instagram_url')->nullable();
-            $table->string('twitter_url')->nullable();
-            $table->string('linkdin_url')->nullable();
-            $table->foreignId('user_id')->cascade('delete');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('user_type')->default('user');
+            $table->string('password');
+            $table->string('status')->default('pending');
+            $table->rememberToken();
+            $table->foreignId('role_id')->nullable()->constrained('roles')->onDelete('set null'); // Add this line
             $table->timestamps();
         });
     }
@@ -40,6 +37,10 @@ class CreateUserProfilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_profiles');
+        Schema::table('users', function (Blueprint $table) {
+            // First, drop the foreign key constraint
+            $table->dropForeign(['role_id']);
+        });
+        Schema::dropIfExists('users');
     }
 }
