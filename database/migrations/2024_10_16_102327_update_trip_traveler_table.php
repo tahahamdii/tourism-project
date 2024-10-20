@@ -12,12 +12,18 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::table('trip_traveler', function (Blueprint $table) {
+{
+    Schema::table('trip_traveler', function (Blueprint $table) {
+        // Check if the column doesn't already exist before adding
+        if (!Schema::hasColumn('trip_traveler', 'traveler_id')) {
             $table->foreignId('traveler_id')->constrained()->onDelete('cascade');
+        }
+        if (!Schema::hasColumn('trip_traveler', 'trip_id')) {
             $table->foreignId('trip_id')->constrained()->onDelete('cascade');
-        });
-    }
+        }
+    });
+}
+
 
     /**
      * Reverse the migrations.
