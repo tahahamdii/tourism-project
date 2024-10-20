@@ -95,7 +95,7 @@ Route::group(['prefix' => 'menu-style'], function () {
     Route::get('boxed-fancy', [HomeController::class, 'boxedfancy'])->name('menu-style.boxedfancy');
 });
 
-// Special Pages
+// Special Page
 Route::group(['prefix' => 'special-pages'], function () {
     Route::get('billing', [HomeController::class, 'billing'])->name('special-pages.billing');
     Route::get('calendar', [HomeController::class, 'calendar'])->name('special-pages.calendar');
