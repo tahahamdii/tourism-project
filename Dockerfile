@@ -32,5 +32,8 @@ RUN composer install --no-dev --prefer-dist --optimize-autoloader --ignore-platf
 # Set appropriate permissions for Laravel directories
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Expose port 80 for the web server
-EXPOSE 80
+# Expose port 8000 for the web server
+EXPOSE 8000
+
+# Start the PHP built-in server
+CMD php artisan serve --host=127.0.0.1 --port=8000

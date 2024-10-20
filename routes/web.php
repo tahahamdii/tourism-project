@@ -165,3 +165,6 @@ Route::get('/chat', [ChatController::class, 'showChatForm'])->name('chat.chat');
 Route::get('/chat', 'App\Http\Controllers\ChatController');
 
 Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.sendMessage');
+Route::get('/test', function () {
+    return 'Test route works!';
+});
