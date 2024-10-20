@@ -23,8 +23,7 @@ class CreateUserProfilesTable extends Migration
             $table->string('country')->nullable();
             $table->string('state')->nullable();
             $table->string('city')->nullable();
-            $table->foreignId('role_id')->nullable()->constrained('roles')->onDelete('set null'); // Add this line
-
+            
             $table->bigInteger('pin_code')->nullable();
             $table->string('facebook_url')->nullable();
             $table->string('instagram_url')->nullable();
