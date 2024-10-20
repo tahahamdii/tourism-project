@@ -1,10 +1,10 @@
-name: CI Pipeline
+name: Laravel CI
 
 on:
   push:
     branches:
-      - final  # Adjust this to your main branch
-  pull_request:
+      - final
+  
 
 jobs:
   build:
@@ -14,8 +14,8 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_DATABASE: HopeUi  # Name of the database
-          MYSQL_ROOT_PASSWORD: ''  # Your root password
+          MYSQL_DATABASE: HopeUi
+          MYSQL_ROOT_PASSWORD: ''  # Leave empty if no password is set
         ports:
           - 3306:3306
         options: >-
@@ -29,13 +29,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up PHP
-        uses: shivammathur/php-action@v2
+        uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'  # Adjust as necessary
-          extensions: mbstring, xml, bcmath, mysqlnd, zip
+          php-version: '8.2'
+          extensions: mbstring, xml, bcmath, curl, zip, gd
+          coverage: none
 
       - name: Install Composer dependencies
-        run: composer install
+        run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Run Laravel migrations
         env:
