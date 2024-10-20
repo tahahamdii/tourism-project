@@ -31,11 +31,13 @@ return new class extends Migration
      * @return void
      */
     public function down()
-    {
-        Schema::table('trip_traveler', function (Blueprint $table) {
-            $table->dropForeign(['traveler_id']);
-            $table->dropForeign(['trip_id']);
-            $table->dropColumn(['traveler_id', 'trip_id']);
-        });
-    }
+{
+    Schema::table('trips', function (Blueprint $table) {
+        if (Schema::hasColumn('trips', 'traveler_id')) {
+            $table->dropForeign(['traveler_id']); // Adjust this to your foreign key name if different
+            $table->dropColumn('traveler_id'); // Only drop if it exists
+        }
+    });
+}
+
 };
