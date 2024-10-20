@@ -15,7 +15,7 @@ jobs:
         image: mysql:5.7
         env:
           MYSQL_DATABASE: HopeUi
-          MYSQL_ROOT_PASSWORD: ''  # Leave empty if no password is set
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_ROOT_PASSWORD }}   # Leave empty if no password is set
         ports:
           - 3306:3306
         options: >-
