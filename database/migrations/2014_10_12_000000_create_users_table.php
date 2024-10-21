@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->string('user_type')->default('user');
             $table->string('password');
             $table->string('status')->default('pending');
+            $table->foreignId('role_id')->default(1)->constrained('roles')->onDelete('cascade'); // Assuming 1 is a valid role ID
+
             $table->rememberToken();
             $table->timestamps();
         });

@@ -197,12 +197,15 @@
           <img src="{{asset('images/avatars/avtar_5.png')}}" alt="User-Profile" class="theme-color-yellow-img img-fluid avatar avatar-50 avatar-rounded">
           <img src="{{asset('images/avatars/avtar_3.png')}}" alt="User-Profile" class="theme-color-pink-img img-fluid avatar avatar-50 avatar-rounded">
             <div class="caption ms-3 ">
-                <h6 class="mb-0 caption-title">{{ auth()->user()->name ?? 'Austin Robertson'  }}</h6>
+                <h6 class="mb-0 caption-title"> {{ 
+                  auth()->user()->role_id == 1 ? 'Admin' : 
+                  (auth()->user()->role_id == 2 ? 'User' : 'Marketing Administrator') 
+              }}</h6>
                 <p class="mb-0 caption-sub-title">Marketing Administrator</p>
             </div>
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-          ` <li><a class="dropdown-item" href="{{route('users.show', auth()->id() || 1)}}">Profile</a></li>
+          ` <li><a class="dropdown-item" href="{{route('users.show', auth()->id() || 12)}}">Profile</a></li>
             <li><a class="dropdown-item" href="{{route('auth.userprivacysetting')}}">Privacy Setting</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="{{route('auth.signin')}}">Logout</a></li>

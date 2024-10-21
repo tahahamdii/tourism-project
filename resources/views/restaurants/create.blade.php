@@ -1,40 +1,40 @@
 <x-app-layout :assets="$assets ?? []">
     <div class="restaurant-content">
-        <h1>Créer un Restaurant</h1>
+        <h1>Create a Restaurant</h1>
 
         <form action="{{ route('restaurants.store') }}" method="POST" id="restaurant-form" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">
-                <label for="name" class="form-label">Nom du Restaurant</label>
+                <label for="name" class="form-label">Restaurant Name</label>
                 <input type="text" name="name" id="name" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label for="cuisine_type" class="form-label">Type de Cuisine</label>
+                <label for="cuisine_type" class="form-label">Cuisine Type</label>
                 <select name="cuisine_type" id="cuisine_type" class="form-select" required>
-                    <option value="" disabled selected>Sélectionnez un type de cuisine</option>
-                    <option value="Italienne">Italienne</option>
-                    <option value="Chinoise">Chinoise</option>
-                    <option value="Indienne">Indienne</option>
-                    <option value="Française">Française</option>
-                    <option value="Méditerranéenne">Méditerranéenne</option>
-                    <option value="Végétarienne">Végétarienne</option>
-                    <option value="Américaine">Américaine</option>
-                    <option value="Mexicaine">Mexicaine</option>
+                    <option value="" disabled selected>Select a cuisine type</option>
+                    <option value="Italian">Italian</option>
+                    <option value="Thai">Thai</option>
+                    <option value="Japanese">Japanese</option>
+                    <option value="Mediterranean">Mediterranean</option>
+                    <option value="Lebanese">Lebanese</option>
+                    <option value="Greek">Greek</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="African">African</option>
                     <!-- Add more cuisine types as needed -->
                 </select>
             </div>
 
             <div class="mb-3">
-                <label for="restaurant_image" class="form-label">Image du Restaurant</label>
+                <label for="restaurant_image" class="form-label">Restaurant Image</label>
                 <input type="file" name="restaurant_image" id="restaurant_image" class="form-control" accept="image/*">
             </div>
 
             <div class="mb-3">
-                <label for="map" class="form-label">Sélectionner un Emplacement</label>
+                <label for="map" class="form-label">Select a Location</label>
                 <div id="map" style="height: 300px; width: 100%;"></div>
-                <button type="button" id="locateMe" class="btn btn-secondary mt-2">Me Localiser</button>
+                <button type="button" id="locateMe" class="btn btn-secondary mt-2">Locate Me</button>
             </div>
 
             <!-- Hidden fields to store latitude, longitude, and full address -->
@@ -43,8 +43,8 @@
             <input type="hidden" name="address" id="address" required>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Créer le Restaurant</button>
-                <a href="{{ route('restaurants.index') }}" class="btn btn-secondary">Annuler</a>
+                <button type="submit" class="btn btn-primary">Create Restaurant</button>
+                <a href="{{ route('restaurants.index') }}" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
     </div>

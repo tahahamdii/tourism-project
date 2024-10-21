@@ -1,9 +1,9 @@
 <x-app-layout :assets="$assets ?? []">
     <div class="menu-content">
         <div class="header-section">
-            <h1>Détails du Menu</h1>
+            <h1>Menu Details</h1>
             <a href="{{ route('menus.index') }}" class="btn btn-secondary mb-3">
-                <i class="fas fa-arrow-left"></i> Retour à la liste des menus
+                <i class="fas fa-arrow-left"></i> Return to the menus
             </a>
         </div>
 
@@ -15,19 +15,19 @@
                     </div>
 
                     <div class="detail-item">
-                        <i class="fas fa-map-marker-alt"></i> <strong>Adresse:</strong> {{ preg_replace('/\s*\(Lat:.*\)$/', '', $menu->restaurant->address) }}
+                        <i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> {{ preg_replace('/\s*\(Lat:.*\)$/', '', $menu->restaurant->address) }}
                     </div>
 
                     <div class="detail-item">
-                        <i class="fas fa-concierge-bell"></i> <strong>Type de Cuisine:</strong> {{ $menu->restaurant->cuisine_type }}
+                        <i class="fas fa-concierge-bell"></i> <strong>Type:</strong> {{ $menu->restaurant->cuisine_type }}
                     </div>
 
                     <div class="detail-item">
-                        <i class="fas fa-calendar-alt"></i> <strong>Date de Création:</strong> {{ $menu->created_at->format('d/m/Y') }}
+                        <i class="fas fa-calendar-alt"></i> <strong>Creation Date:</strong> {{ $menu->created_at->format('d/m/Y') }}
                     </div>
 
                     <div class="detail-item">
-                        <i class="fas fa-image"></i> <strong>Image du Restaurant:</strong>
+                        <i class="fas fa-image"></i> <strong>Restaurant Image:</strong>
                     </div>
                     @if($menu->restaurant->restaurant_image)
                         <div class="image-container">
@@ -35,12 +35,12 @@
                         </div>
                     @else
                         <div class="image-container">
-                            <p>Aucune image disponible</p>
+                            <p>No Image available</p>
                         </div>
                     @endif
 
                     <div class="detail-item">
-                        <i class="fas fa-image"></i> <strong>Image du Menu:</strong>
+                        <i class="fas fa-image"></i> <strong>Menu Image:</strong>
                     </div>
                     @if($menu->photo)
                         <div class="image-container">
@@ -48,20 +48,20 @@
                         </div>
                     @else
                         <div class="image-container">
-                            <p>Aucune image disponible</p>
+                            <p>No available for the moment</p>
                         </div>
                     @endif
                 </div>
 
                 <div class="action-buttons mt-4">
                     <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-warning">
-                        <i class="fas fa-edit"></i> Éditer
+                        <i class="fas fa-edit"></i> Update
                     </a>
                     <form action="{{ route('menus.destroy', $menu->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce menu ?');">
-                            <i class="fas fa-trash"></i> Supprimer
+                            <i class="fas fa-trash"></i> Delete
                         </button>
                     </form>
                 </div>

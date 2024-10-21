@@ -3,7 +3,7 @@
         <div class="header-section">
             <h1>Menus</h1>
             <a href="{{ route('menus.create') }}" class="btn btn-primary mb-3">
-                <i class="fas fa-plus"></i> Créer un Menu
+                <i class="fas fa-plus"></i> Create Menu
             </a>
         </div>
 
@@ -24,21 +24,21 @@
                                 @if($menu->photo)
                                     <img src="{{ asset('storage/' . $menu->photo) }}" alt="Menu Image" class="img-fluid fixed-size-image rounded">
                                 @else
-                                    <p>Aucune image disponible</p>
+                                    <p>no Menu Available for the moment</p>
                                 @endif
                             </div>
                             <div class="mt-auto d-flex flex-wrap justify-content-start"> <!-- Push buttons to the bottom and align them -->
                                 <a href="{{ route('menus.show', $menu->id) }}" class="btn btn-info btn-sm mb-2 me-2">
-                                    <i class="fas fa-eye"></i> Voir
+                                    <i class="fas fa-eye"></i> View
                                 </a>
                                 <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-warning btn-sm mb-2 me-2">
-                                    <i class="fas fa-edit"></i> Éditer
+                                    <i class="fas fa-edit"></i> Update
                                 </a>
                                 <form action="{{ route('menus.destroy', $menu->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm mb-2 me-2" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce menu ?');">
-                                        <i class="fas fa-trash"></i> Supprimer
+                                        <i class="fas fa-trash"></i> Delete
                                     </button>
                                 </form>
                             </div>

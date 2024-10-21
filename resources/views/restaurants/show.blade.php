@@ -1,9 +1,9 @@
 <x-app-layout :assets="$assets ?? []">
     <div class="restaurant-content">
         <div class="header-section">
-            <h1>Informations sur le Restaurant</h1>
+            <h1>Restaurant Information</h1>
             <a href="{{ route('restaurants.index') }}" class="btn btn-secondary mb-3">
-                <i class="fas fa-arrow-left"></i> Retour à la liste des restaurants
+                <i class="fas fa-arrow-left"></i> Return 
             </a>
         </div>
 
@@ -11,17 +11,17 @@
             <div class="card-body">
                 <div class="restaurant-details">
                     <div class="detail-item">
-                        <i class="fas fa-utensils"></i> <strong>Nom du Restaurant:</strong> {{ $restaurant->name }}
+                        <i class="fas fa-utensils"></i> <strong>Restaurant Name:</strong> {{ $restaurant->name }}
                     </div>
                     <div class="detail-item">
-                        <i class="fas fa-concierge-bell"></i> <strong>Type de Cuisine:</strong> {{ $restaurant->cuisine_type }}
+                        <i class="fas fa-concierge-bell"></i> <strong>Cuisine Types:</strong> {{ $restaurant->cuisine_type }}
                     </div>
                     <div class="detail-item">
-                        <i class="fas fa-map-marker-alt"></i> <strong>Adresse:</strong> {{ preg_replace('/\s*\(Lat:.*?Lng:.*?\)\s*/', '', $restaurant->address) }}
+                        <i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> {{ preg_replace('/\s*\(Lat:.*?Lng:.*?\)\s*/', '', $restaurant->address) }}
                     </div>
 
                     <div class="detail-item">
-                        <i class="fas fa-image"></i> <strong>Image du Restaurant:</strong>
+                        <i class="fas fa-image"></i> <strong>Restaurant Image :</strong>
                     </div>
                     @if($restaurant->restaurant_image)
                         <div class="image-container">
@@ -29,7 +29,7 @@
                         </div>
                     @else
                         <div class="image-container">
-                            <p>Aucune image disponible</p>
+                            <p>No Image Available</p>
                         </div>
                     @endif
 
@@ -46,9 +46,9 @@
                         </div>
                     @else
                         <div class="image-container">
-                            <p>Aucun menu disponible</p>
+                            <p>No menu Available</p>
                             <a href="{{ route('menus.create', ['restaurant_id' => $restaurant->id]) }}" class="btn btn-primary mt-2">
-                                <i class="fas fa-plus"></i> Créer un menu
+                                <i class="fas fa-plus"></i> Create Menu
                             </a>
                         </div>
                     @endif
@@ -56,13 +56,13 @@
 
                 <div class="action-buttons mt-4">
                     <a href="{{ route('restaurants.edit', $restaurant->id) }}" class="btn btn-warning">
-                        <i class="fas fa-edit"></i> Éditer
+                        <i class="fas fa-edit"></i> Update
                     </a>
                     <form action="{{ route('restaurants.destroy', $restaurant->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce restaurant ?');">
-                            <i class="fas fa-trash"></i> Supprimer
+                            <i class="fas fa-trash"></i> Delete
                         </button>
                     </form>
                 </div>

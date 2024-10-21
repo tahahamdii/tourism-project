@@ -1,9 +1,9 @@
 <x-app-layout :assets="$assets ?? []">
     <div class="restaurant-content">
         <div class="header-section">
-            <h1>Liste des Restaurants</h1>
+            <h1>Restaurants</h1>
             <a href="{{ route('restaurants.create') }}" class="btn btn-primary mb-3">
-                <i class="fas fa-plus"></i> Créer un Restaurant
+                <i class="fas fa-plus"></i> Add Restaurant
             </a>
         </div>
 
@@ -24,31 +24,31 @@
                                 @if($restaurant->restaurant_image)
                                     <img src="{{ asset('storage/' . $restaurant->restaurant_image) }}" alt="Restaurant Image" class="img-fluid fixed-size-image rounded">
                                 @else
-                                    <p>Aucune image disponible</p>
+                                    <p>No image Available</p>
                                 @endif
                             </div>
                             <p class="card-text">{{ preg_replace('/.*?,\s*([^,]+),\s*.*$/', '$1', $restaurant->address) }}</p>
                             <div class="mt-auto d-flex flex-wrap justify-content-start"> <!-- Push buttons to the bottom and align them -->
                                 <a href="{{ route('restaurants.show', $restaurant->id) }}" class="btn btn-info btn-sm mb-2 me-2">
-                                    <i class="fas fa-eye"></i> Voir
+                                    <i class="fas fa-eye"></i> View
                                 </a>
                                 <a href="{{ route('restaurants.edit', $restaurant->id) }}" class="btn btn-warning btn-sm mb-2 me-2">
-                                    <i class="fas fa-edit"></i> Modifier
+                                    <i class="fas fa-edit"></i> Update
                                 </a>
                                 <form action="{{ route('restaurants.destroy', $restaurant->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm mb-2 me-2" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce restaurant ?');">
-                                        <i class="fas fa-trash"></i> Supprimer
+                                        <i class="fas fa-trash"></i> Delete
                                     </button>
                                 </form>
                                 @if ($restaurant->menus()->exists())
                                     <a href="{{ route('menus.show', $restaurant->menus->first()->id) }}" class="btn btn-info btn-sm mb-2 me-2">
-                                        <i class="fas fa-utensils"></i> Voir Menu
+                                        <i class="fas fa-utensils"></i> View Menu
                                     </a>
                                 @else
                                     <a href="{{ route('menus.create', ['restaurant_id' => $restaurant->id]) }}" class="btn btn-primary btn-sm mb-2 me-2">
-                                        <i class="fas fa-plus"></i> Créer Menu
+                                        <i class="fas fa-plus"></i> Create Menu
                                     </a>
                                 @endif
                             </div>

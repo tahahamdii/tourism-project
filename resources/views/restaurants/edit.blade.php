@@ -1,31 +1,31 @@
 <x-app-layout :assets="$assets ?? []">
     <div class="edit-restaurant-content">
-        <h1>Modifier les Informations du Restaurant</h1>
+        <h1>Modify Restaurant Information</h1>
 
         <form action="{{ route('restaurants.update', $restaurant->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
             <div class="mb-3">
-                <label for="name" class="form-label"><strong>Nom du Restaurant:</strong></label>
+                <label for="name" class="form-label"><strong>Restaurant Name:</strong></label>
                 <input type="text" class="form-control" name="name" id="name" value="{{ $restaurant->name }}" required>
             </div>
 
             <div class="mb-3">
-                <label for="cuisine_type" class="form-label"><strong>Type de Cuisine:</strong></label>
+                <label for="cuisine_type" class="form-label"><strong>Cuisine Type:</strong></label>
                 <select class="form-select" name="cuisine_type" id="cuisine_type" required>
-                    <option value="" disabled selected>Sélectionnez un type de cuisine</option>
-                    <option value="Française" {{ $restaurant->cuisine_type == 'Française' ? 'selected' : '' }}>Française</option>
-                    <option value="Italienne" {{ $restaurant->cuisine_type == 'Italienne' ? 'selected' : '' }}>Italienne</option>
-                    <option value="Chinoise" {{ $restaurant->cuisine_type == 'Chinoise' ? 'selected' : '' }}>Chinoise</option>
-                    <option value="Japonaise" {{ $restaurant->cuisine_type == 'Japonaise' ? 'selected' : '' }}>Japonaise</option>
-                    <option value="Indienne" {{ $restaurant->cuisine_type == 'Indienne' ? 'selected' : '' }}>Indienne</option>
+                    <option value="" disabled selected>Select a cuisine type</option>
+                    <option value="French" {{ $restaurant->cuisine_type == 'French' ? 'selected' : '' }}>French</option>
+                    <option value="Italian" {{ $restaurant->cuisine_type == 'Italian' ? 'selected' : '' }}>Italian</option>
+                    <option value="Chinese" {{ $restaurant->cuisine_type == 'Chinese' ? 'selected' : '' }}>Chinese</option>
+                    <option value="Japanese" {{ $restaurant->cuisine_type == 'Japanese' ? 'selected' : '' }}>Japanese</option>
+                    <option value="Indian" {{ $restaurant->cuisine_type == 'Indian' ? 'selected' : '' }}>Indian</option>
                     <!-- Add more cuisine types as needed -->
                 </select>
             </div>
 
             <div class="mb-3">
-                <label for="restaurant_image" class="form-label"><strong>Image du Restaurant:</strong></label>
+                <label for="restaurant_image" class="form-label"><strong>Restaurant Image:</strong></label>
                 <input type="file" class="form-control" name="restaurant_image" id="restaurant_image" accept="image/*">
                 @if($restaurant->restaurant_image)
                     <div class="image-preview mt-3">
@@ -35,22 +35,22 @@
             </div>
 
             <div class="mb-3">
-                <label for="address" class="form-label"><strong>Adresse:</strong></label>
+                <label for="address" class="form-label"><strong>Address:</strong></label>
                 <input type="text" class="form-control" name="address" id="address" value="{{ preg_replace('/\s*\(Lat:.*?Lng:.*?\)\s*/', '', $restaurant->address) }}" required>
             </div>
 
             <div class="mb-3">
-                <label for="map" class="form-label"><strong>Emplacement sur la carte:</strong></label>
+                <label for="map" class="form-label"><strong>Location on Map:</strong></label>
                 <div id="map" style="height: 300px; width: 100%;"></div>
-                <button type="button" id="locateMe" class="btn btn-secondary mt-2">Me Localiser</button>
+                <button type="button" id="locateMe" class="btn btn-secondary mt-2">Locate Me</button>
             </div>
 
             <input type="hidden" name="latitude" id="latitude" value="{{ $restaurant->latitude }}">
             <input type="hidden" name="longitude" id="longitude" value="{{ $restaurant->longitude }}">
 
             <div class="mb-3 button-group">
-                <button type="submit" class="btn btn-success">Mettre à Jour</button>
-                <a href="{{ route('restaurants.index') }}" class="btn btn-secondary">Annuler</a>
+                <button type="submit" class="btn btn-success">Update</button>
+                <a href="{{ route('restaurants.index') }}" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
     </div>

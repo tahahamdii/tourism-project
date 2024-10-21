@@ -29,6 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         'banned',
         'email',
         'password',
+        'role_id',
     ];
 
     /**
@@ -59,5 +60,14 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 
     public function userProfile() {
         return $this->hasOne(UserProfile::class, 'user_id', 'id');
+    }
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class,'role_users');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 }
