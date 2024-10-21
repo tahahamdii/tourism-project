@@ -14,6 +14,11 @@ class RestaurantController extends Controller
         $restaurants = Restaurant::all();
         return view('restaurants.index', compact('restaurants'));
     }
+    public function userindex()
+    {
+        $restaurants = Restaurant::all();
+        return view('restaurants.user', compact('restaurants'));
+    }
 
     // Show the form for creating a new restaurant
     public function create()

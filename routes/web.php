@@ -70,21 +70,29 @@ Route::delete('/gestionVoyageur/{id}', [TravelerController::class, 'destroy'])->
 Route::get('/ui', [HomeController::class, 'uisheet'])->name('uisheet');
 
 // Authenticated Routes
+// Authenticated Routes
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('accommodations', AccommodationController::class);
-    Route::resource('bookings', BookingController::class);
+    Route::resource('accommodations', AccommodationController::class)->middleware('role:1'); // Only admin can access
+    Route::resource('bookings', BookingController::class)->middleware('role:1');
 
-    // Permission Module
-    Route::get('/role-permission', [RolePermission::class, 'index'])->name('role.permission.list');
-    Route::resource('permission', PermissionController::class);
-    Route::resource('role', RoleController::class);
+    // Apply the role middleware to routes based on role_id
+    Route::group(['middleware' => 'role:1'], function () {
+        Route::get('/', [HomeController::class, 'index'])->name('dashboard'); // Admin can access dashboard
+        Route::resource('users', UserController::class);
+    });
 
-    // Dashboard Routes
-    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+    // User can access everything except '/'
+    Route::group(['middleware' => 'role:2'], function () {
+        Route::get('/home', [HomePageController::class, 'home'])->name('home');
+        Route::get('/user/restaurant', [RestaurantController::class, 'userindex'])->name('restaurants.user');
+        Route::get('/user/events', [EventController::class, 'userindex'])->name('events.user');
 
-    // Users Module
-    Route::resource('users', UserController::class);
+ // User can access /home
+    });
 });
+
+// Other public routes can remain as is...
+
 
 // App Details Page => 'Dashboard'
 Route::group(['prefix' => 'menu-style'], function () {

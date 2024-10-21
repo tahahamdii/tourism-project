@@ -161,4 +161,11 @@ class UserController extends Controller
         return redirect()->back()->with($status,$message);
 
     }
+
+    public function dashboard()
+{
+    $events = Event::where('is_active', true)->get(); // Fetch active events for the user
+    return view('user.dashboard', compact('events'));
+}
+
 }

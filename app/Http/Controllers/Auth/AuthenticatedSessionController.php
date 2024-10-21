@@ -28,13 +28,24 @@ class AuthenticatedSessionController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(LoginRequest $request)
-    {
-        $request->authenticate();
+{
+    $request->authenticate();
 
-        $request->session()->regenerate();
+    $request->session()->regenerate();
 
+    // Check the role of the authenticated user
+    $user = Auth::user();
+    
+    if ($user->role_id == 1) { // Assuming 1 is the admin role ID
         return redirect(RouteServiceProvider::HOME);
+    } elseif ($user->role_id == 2) { // Assuming 2 is the user role ID
+        return redirect(RouteServiceProvider::USER); // Adjust this to the route name for the user dashboard
     }
+
+    // Fallback redirect (you can customize this as needed)
+    // return redirect(RouteServiceProvider::HOME);
+}
+
 
     /**
      * Destroy an authenticated session.

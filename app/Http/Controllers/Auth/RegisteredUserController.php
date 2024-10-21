@@ -60,6 +60,11 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
+        // Check the role and redirect accordingly
+    if ($request->role_id == 1) { // Assuming 1 is the admin role ID
         return redirect(RouteServiceProvider::HOME);
+    } elseif ($request->role_id == 2) { // Assuming 2 is the user role ID
+        return redirect(RouteServiceProvider::USER); // Adjust this to the route name for the user dashboard
+    }
     }
 }
