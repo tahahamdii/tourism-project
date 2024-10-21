@@ -13,7 +13,7 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_DATABASE: HopeUi
+          MYSQL_DATABASE: ecotour
           MYSQL_ROOT_PASSWORD: ${{ secrets.DB_ROOT_PASSWORD }}
         ports:
           - 3306:3306
