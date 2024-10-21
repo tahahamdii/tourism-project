@@ -31,7 +31,7 @@
                     <tr>
                         <td>{{ $tour->id }}</td>
                         <td>
-                            <a href="{{ route('tours.show', $tour) }}">{{ $tour->title }}</a>
+                            <a href="#">{{ $tour->title }}</a>
                         </td>
                         <td>{{ $tour->description }}</td>
                         <td>{{ \Carbon\Carbon::parse($tour->date)->format('d-m-Y') }}</td>

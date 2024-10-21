@@ -1,6 +1,6 @@
-@extends('layouts.navbar')
 
-@section('content') <!-- Start content section -->
+
+<?php $__env->startSection('content'); ?> <!-- Start content section -->
    
    <div class="accommodations-content">
         <h1>Accommodations</h1>
@@ -17,14 +17,14 @@
             </tr>
             </thead>
             <tbody>
-            @foreach ($accommodations as $accommodation)
+            <?php $__currentLoopData = $accommodations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $accommodation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
-                    <td>{{ $accommodation->id }}</td>
+                    <td><?php echo e($accommodation->id); ?></td>
                     <td>
-                        <a href="{{ route('accommodations.show', $accommodation) }}">{{ $accommodation->name }}</a>
+                        <a href="<?php echo e(route('accommodations.show', $accommodation)); ?>"><?php echo e($accommodation->name); ?></a>
                     </td>
-                    <td>{{ $accommodation->address }}</td>
-                    <td>{{ $accommodation->price_per_night }} $</td>
+                    <td><?php echo e($accommodation->address); ?></td>
+                    <td><?php echo e($accommodation->price_per_night); ?> $</td>
                     <td>
                         <!-- Button to edit the accommodation -->
                         <a class="btn btn-warning btn-sm">Make Reservation</a>
@@ -32,11 +32,11 @@
                         
                     </td>
                 </tr>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
     </div>
-    @endsection <!-- End content section -->
+    <?php $__env->stopSection(); ?> <!-- End content section -->
 
     <style>
         .accommodations-content {
@@ -47,3 +47,5 @@
             border-radius: 5px;
         }
     </style>
+
+<?php echo $__env->make('layouts.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\projects\tourism\resources\views/accommodations/user.blade.php ENDPATH**/ ?>

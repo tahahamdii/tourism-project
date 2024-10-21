@@ -1,49 +1,43 @@
-@extends('layouts.navbar')
 
-@section('content') <!-- Start content section -->
+
+<?php $__env->startSection('content'); ?> <!-- Start content section -->
 
 <div class="restaurant-content">
     <div class="header-section">
         <h1>Restaurants</h1>
     </div>
 
-    @if (session('success'))
+    <?php if(session('success')): ?>
         <div class="alert alert-success">
-            {{ session('success') }}
+            <?php echo e(session('success')); ?>
+
         </div>
-    @endif
+    <?php endif; ?>
 
     <div class="row">
-        @foreach($restaurants as $restaurant)
+        <?php $__currentLoopData = $restaurants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $restaurant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="col-md-4 mb-4"> <!-- Adjust the column size as needed -->
                 <div class="card h-100 shadow-sm"> <!-- Add h-100 class to make all cards the same height -->
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">{{ $restaurant->name }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ $restaurant->cuisine_type }}</h6>
+                        <h5 class="card-title"><?php echo e($restaurant->name); ?></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><?php echo e($restaurant->cuisine_type); ?></h6>
                         <div class="restaurant-image mb-3">
-                            @if($restaurant->restaurant_image)
-                                <img src="{{ asset('photos/' . $restaurant->restaurant_image) }}" alt="Restaurant Image" class="img-fluid fixed-size-image rounded">
-                            @else
+                            <?php if($restaurant->restaurant_image): ?>
+                                <img src="<?php echo e(asset('photos/' . $restaurant->restaurant_image)); ?>" alt="Restaurant Image" class="img-fluid fixed-size-image rounded">
+                            <?php else: ?>
                                 <p>No image Available</p>
-                            @endif
+                            <?php endif; ?>
                         </div>
-                        <p class="card-text">{{ preg_replace('/.*?,\s*([^,]+),\s*.*$/', '$1', $restaurant->address) }}</p>
-                        {{-- <div class="mt-auto d-flex flex-wrap justify-content-start"> <!-- Push buttons to the bottom and align them -->
-                            <a href="{{ route('restaurants.show', $restaurant->id) }}" class="btn btn-info btn-sm mb-2 me-2">
-                                <i class="fas fa-eye"></i> View
-                            </a>
-                            <a class="btn btn-info btn-sm mb-2 me-2">
-                                <i class="fas fa-utensils"></i> View Menu
-                            </a>
-                        </div> --}}
+                        <p class="card-text"><?php echo e(preg_replace('/.*?,\s*([^,]+),\s*.*$/', '$1', $restaurant->address)); ?></p>
+                        
                     </div>
                 </div>
             </div>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
 </div>
 
-@endsection <!-- End content section -->
+<?php $__env->stopSection(); ?> <!-- End content section -->
 
 <style>
     .restaurant-content {
@@ -98,3 +92,5 @@
 
 <!-- Font Awesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<?php echo $__env->make('layouts.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\projects\tourism\resources\views/restaurants/user.blade.php ENDPATH**/ ?>

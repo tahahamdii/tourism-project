@@ -40,7 +40,7 @@
                         <div class="image-container">
                             @foreach($restaurant->menus as $menu)
                                 <div class="menu-item">
-                                    <img src="{{ asset('photos' . $menu->photo) }}" alt="Menu Image" class="restaurant-image rounded">
+                                    <img src="{{ asset('photos/' . $menu->photo) }}" alt="Menu Image" class="restaurant-image rounded">
                                 </div>
                             @endforeach
                         </div>
