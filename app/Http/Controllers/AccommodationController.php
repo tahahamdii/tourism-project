@@ -12,6 +12,12 @@ class AccommodationController extends Controller
         $accommodations = Accommodation::all();
         return view('accommodations.index', compact('accommodations'));
     }
+    public function userindex()
+    {
+        $accommodations = Accommodation::all();
+        return view('accommodations.user', compact('accommodations'));
+    }
+
 
     public function create()
     {

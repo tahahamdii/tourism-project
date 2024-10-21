@@ -11,6 +11,11 @@ class TourController extends Controller
         $tours = Tour::paginate(10); 
         return view('tours.index', compact('tours'));
     }
+    public function userindex()
+    {
+        $tours = Tour::paginate(10); 
+        return view('tours.user', compact('tours'));
+    }
 
     public function create()
     {

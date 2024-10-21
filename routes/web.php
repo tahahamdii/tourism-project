@@ -86,6 +86,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/home', [HomePageController::class, 'home'])->name('home');
         Route::get('/user/restaurant', [RestaurantController::class, 'userindex'])->name('restaurants.user');
         Route::get('/user/events', [EventController::class, 'userindex'])->name('events.user');
+        Route::get('/user/tours', [TourController::class, 'userindex'])->name('tours.user');
+        Route::get('/user/hotels', [AccommodationController::class, 'userindex'])->name('accommodations.user');
+
+
 
  // User can access /home
     });

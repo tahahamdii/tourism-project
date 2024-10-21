@@ -1,8 +1,16 @@
-<x-app-layout :assets="$assets ?? []">
+<?php if (isset($component)) { $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da = $component; } ?>
+<?php $component = App\View\Components\AppLayout::resolve(['assets' => $assets ?? []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('app-layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\AppLayout::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
     <div class="restaurant-content">
         <div class="header-section">
             <h1>Restaurant Information</h1>
-            <a href="{{ route('restaurants.index') }}" class="btn btn-secondary mb-3">
+            <a href="<?php echo e(route('restaurants.index')); ?>" class="btn btn-secondary mb-3">
                 <i class="fas fa-arrow-left"></i> Return 
             </a>
         </div>
@@ -11,56 +19,59 @@
             <div class="card-body">
                 <div class="restaurant-details">
                     <div class="detail-item">
-                        <i class="fas fa-utensils"></i> <strong>Restaurant Name:</strong> {{ $restaurant->name }}
+                        <i class="fas fa-utensils"></i> <strong>Restaurant Name:</strong> <?php echo e($restaurant->name); ?>
+
                     </div>
                     <div class="detail-item">
-                        <i class="fas fa-concierge-bell"></i> <strong>Cuisine Types:</strong> {{ $restaurant->cuisine_type }}
+                        <i class="fas fa-concierge-bell"></i> <strong>Cuisine Types:</strong> <?php echo e($restaurant->cuisine_type); ?>
+
                     </div>
                     <div class="detail-item">
-                        <i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> {{ preg_replace('/\s*\(Lat:.*?Lng:.*?\)\s*/', '', $restaurant->address) }}
+                        <i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> <?php echo e(preg_replace('/\s*\(Lat:.*?Lng:.*?\)\s*/', '', $restaurant->address)); ?>
+
                     </div>
 
                     <div class="detail-item">
                         <i class="fas fa-image"></i> <strong>Restaurant Image :</strong>
                     </div>
-                    @if($restaurant->restaurant_image)
+                    <?php if($restaurant->restaurant_image): ?>
                         <div class="image-container">
-                            <img src="{{ asset('photos/' . $restaurant->restaurant_image) }}" alt="Restaurant Image" class="restaurant-image rounded">
+                            <img src="<?php echo e(asset('photos/' . $restaurant->restaurant_image)); ?>" alt="Restaurant Image" class="restaurant-image rounded">
                         </div>
-                    @else
+                    <?php else: ?>
                         <div class="image-container">
                             <p>No Image Available</p>
                         </div>
-                    @endif
+                    <?php endif; ?>
 
                     <div class="detail-item">
                         <i class="fas fa-book-open"></i> <strong>Menus:</strong>
                     </div>
-                    @if($restaurant->menus->isNotEmpty())
+                    <?php if($restaurant->menus->isNotEmpty()): ?>
                         <div class="image-container">
-                            @foreach($restaurant->menus as $menu)
+                            <?php $__currentLoopData = $restaurant->menus; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $menu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="menu-item">
-                                    <img src="{{ asset('photos' . $menu->photo) }}" alt="Menu Image" class="restaurant-image rounded">
+                                    <img src="<?php echo e(asset('public/photos' . $menu->photo)); ?>" alt="Menu Image" class="restaurant-image rounded">
                                 </div>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
-                    @else
+                    <?php else: ?>
                         <div class="image-container">
                             <p>No menu Available</p>
-                            <a href="{{ route('menus.create', ['restaurant_id' => $restaurant->id]) }}" class="btn btn-primary mt-2">
+                            <a href="<?php echo e(route('menus.create', ['restaurant_id' => $restaurant->id])); ?>" class="btn btn-primary mt-2">
                                 <i class="fas fa-plus"></i> Create Menu
                             </a>
                         </div>
-                    @endif
+                    <?php endif; ?>
                 </div>
 
                 <div class="action-buttons mt-4">
-                    <a href="{{ route('restaurants.edit', $restaurant->id) }}" class="btn btn-warning">
+                    <a href="<?php echo e(route('restaurants.edit', $restaurant->id)); ?>" class="btn btn-warning">
                         <i class="fas fa-edit"></i> Update
                     </a>
-                    <form action="{{ route('restaurants.destroy', $restaurant->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
+                    <form action="<?php echo e(route('restaurants.destroy', $restaurant->id)); ?>" method="POST" style="display:inline;">
+                        <?php echo csrf_field(); ?>
+                        <?php echo method_field('DELETE'); ?>
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce restaurant ?');">
                             <i class="fas fa-trash"></i> Delete
                         </button>
@@ -170,4 +181,10 @@
 
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-</x-app-layout>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>
+<?php $component = $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da; ?>
+<?php unset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da); ?>
+<?php endif; ?>
+<?php /**PATH C:\projects\tourism\resources\views/restaurants/show.blade.php ENDPATH**/ ?>

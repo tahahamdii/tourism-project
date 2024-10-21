@@ -40,7 +40,8 @@ class RestaurantController extends Controller
         // Handle the restaurant image upload
         $imagePath = null;
         if ($request->hasFile('restaurant_image')) {
-            $imagePath = $request->file('restaurant_image')->store('photos', 'public');
+            $imagePath = $request->file('restaurant_image')->store('', 'public');
+            
         }
 
         // Create a new restaurant

@@ -1,0 +1,142 @@
+<?php if (isset($component)) { $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da = $component; } ?>
+<?php $component = App\View\Components\AppLayout::resolve(['assets' => $assets ?? []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('app-layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\AppLayout::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+    <div class="restaurant-content">
+        <h1>Create a Restaurant</h1>
+
+        <form action="<?php echo e(route('restaurants.store')); ?>" method="POST" id="restaurant-form" enctype="multipart/form-data">
+            <?php echo csrf_field(); ?>
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Restaurant Name</label>
+                <input type="text" name="name" id="name" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="cuisine_type" class="form-label">Cuisine Type</label>
+                <select name="cuisine_type" id="cuisine_type" class="form-select" required>
+                    <option value="" disabled selected>Select a cuisine type</option>
+                    <option value="Italian">Italian</option>
+                    <option value="Thai">Thai</option>
+                    <option value="Japanese">Japanese</option>
+                    <option value="Mediterranean">Mediterranean</option>
+                    <option value="Lebanese">Lebanese</option>
+                    <option value="Greek">Greek</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="African">African</option>
+                    <!-- Add more cuisine types as needed -->
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="restaurant_image" class="form-label">Restaurant Image</label>
+                <input type="file" name="restaurant_image" id="restaurant_image" class="form-control" accept="image/*">
+            </div>
+
+            <div class="mb-3">
+                <label for="map" class="form-label">Select a Location</label>
+                <div id="map" style="height: 300px; width: 100%;"></div>
+                <button type="button" id="locateMe" class="btn btn-secondary mt-2">Locate Me</button>
+            </div>
+
+            <!-- Hidden fields to store latitude, longitude, and full address -->
+            <input type="hidden" name="latitude" id="latitude" required>
+            <input type="hidden" name="longitude" id="longitude" required>
+            <input type="hidden" name="address" id="address" required>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Create Restaurant</button>
+                <a href="<?php echo e(route('restaurants.index')); ?>" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const map = L.map('map').setView([35.6895, 139.6917], 13); // Default to Tokyo
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+            }).addTo(map);
+
+            const marker = L.marker([35.6895, 139.6917]).addTo(map); // Default marker
+
+            // Function to update marker, latitude, longitude, and address
+            function updateLocation(lat, lng) {
+                marker.setLatLng([lat, lng]);
+                document.getElementById('latitude').value = lat;
+                document.getElementById('longitude').value = lng;
+
+                // Reverse geocoding to get the address
+                fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.display_name) {
+                            const fullAddress = `${data.display_name} (Lat: ${lat}, Lng: ${lng})`;
+                            document.getElementById('address').value = fullAddress;
+                        }
+                    })
+                    .catch(error => console.error('Error retrieving address:', error));
+            }
+
+            // Get user's current location
+            document.getElementById('locateMe').addEventListener('click', function() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        map.setView([lat, lng], 13);
+                        updateLocation(lat, lng);
+                    }, function() {
+                        alert('Unable to retrieve your location.');
+                    });
+                } else {
+                    alert('Geolocation is not supported by this browser.');
+                }
+            });
+
+            // Click event on the map to set the marker, lat, lng, and get the address
+            map.on('click', function(e) {
+                const lat = e.latlng.lat;
+                const lng = e.latlng.lng;
+                updateLocation(lat, lng);
+            });
+
+            // Before form submission, make sure the address field is filled with complete data
+            document.getElementById('restaurant-form').addEventListener('submit', function(e) {
+                const addressField = document.getElementById('address').value;
+                if (!addressField) {
+                    e.preventDefault();
+                    alert('Please select a location on the map.');
+                }
+            });
+        });
+    </script>
+
+    <style>
+        .restaurant-content {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+    </style>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>
+<?php $component = $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da; ?>
+<?php unset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da); ?>
+<?php endif; ?>
+<?php /**PATH C:\projects\tourism\resources\views/restaurants/create.blade.php ENDPATH**/ ?>

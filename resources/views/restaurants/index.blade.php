@@ -22,7 +22,7 @@
                             <h6 class="card-subtitle mb-2 text-muted">{{ $restaurant->cuisine_type }}</h6>
                             <div class="restaurant-image mb-3">
                                 @if($restaurant->restaurant_image)
-                                    <img src="{{ asset('storage/' . $restaurant->restaurant_image) }}" alt="Restaurant Image" class="img-fluid fixed-size-image rounded">
+                                    <img src="{{ asset('photos/' . $restaurant->restaurant_image) }}" alt="Restaurant Image" class="img-fluid fixed-size-image rounded">
                                 @else
                                     <p>No image Available</p>
                                 @endif
