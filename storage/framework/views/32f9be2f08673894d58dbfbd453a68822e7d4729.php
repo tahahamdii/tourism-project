@@ -51,7 +51,7 @@
                         <div class="image-container">
                             <?php $__currentLoopData = $restaurant->menus; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $menu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="menu-item">
-                                    <img src="<?php echo e(asset('public/photos' . $menu->photo)); ?>" alt="Menu Image" class="restaurant-image rounded">
+                                    <img src="<?php echo e(asset('photos' . $menu->photo)); ?>" alt="Menu Image" class="restaurant-image rounded">
                                 </div>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>

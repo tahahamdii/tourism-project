@@ -56,7 +56,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const map = L.map('map').setView([35.6895, 139.6917], 13); // Default to Tokyo
+            const map = L.map('map').setView([36.8065, 10.1815], 13); // Default to Tunis
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,

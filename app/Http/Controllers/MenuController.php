@@ -40,7 +40,7 @@ class MenuController extends Controller
             $file = $request->file('menu_image');
 
             if ($file->isValid()) {
-                $path = $file->store('public/photos');
+                $path = $file->store('', 'public');
                 $data['photo'] = str_replace('public/', '', $path);
             } else {
                 return back()->withErrors('File upload failed.');
@@ -77,7 +77,7 @@ class MenuController extends Controller
 
             $file = $request->file('menu_image');
             if ($file->isValid()) {
-                $path = $file->store('public/photos');
+                $path = $file->store('', 'public');
                 $data['photo'] = str_replace('public/', '', $path);
             } else {
                 return back()->withErrors('File upload failed.');
