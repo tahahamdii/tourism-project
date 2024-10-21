@@ -63,3 +63,44 @@ jobs:
       # Push Docker image to Docker Hub
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/laravel_tourismedurable:latest
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Generate Dockerrun.aws.json
+        run: |
+          echo '{
+            "AWSEBDockerrunVersion": 2,
+            "containerDefinitions": [
+              {
+                "name": "laravel_tourismedurable",
+                "image": "${{ secrets.DOCKER_USERNAME }}/laravel_tourismedurable:latest",
+                "essential": true,
+                "memory": 512,
+                "cpu": 1,
+                "portMappings": [
+                  {
+                    "hostPort": 80,
+                    "containerPort": 80
+                  }
+                ]
+              }
+            ]
+          }' > Dockerrun.aws.json
+
+      - name: Create deployment package
+        run: zip deploy.zip Dockerrun.aws.json
+
+      - name: Deploy to AWS Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v20
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: tourism
+          environment_name: Tourism-env
+          version_label: ${{ github.sha }}
+          region: us-east-1
+          deployment_package: deploy.zip       
