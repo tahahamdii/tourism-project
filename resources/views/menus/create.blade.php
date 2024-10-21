@@ -11,7 +11,7 @@
                 <div class="mb-3">
                     <label for="restaurant_id" class="form-label">Restaurant</label>
                     <select name="restaurant_id" id="restaurant_id" class="form-select" required>
-                        <option value="" disabled selected>Sélectionnez un restaurant</option>
+                        <option value="" disabled selected>Select Restaurant</option>
                         @foreach($restaurants as $restaurant)
                             <option value="{{ $restaurant->id }}">{{ $restaurant->name }}</option>
                         @endforeach
@@ -20,7 +20,7 @@
             @endif
 
             <div class="mb-3">
-                <label for="menu_image" class="form-label">Image du Menu</label>
+                <label for="menu_image" class="form-label">Menu Image</label>
                 <input type="file" name="menu_image" id="menu_image" class="form-control" required onchange="previewImage(event)">
             </div>
 
@@ -30,8 +30,8 @@
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Créer le Menu</button>
-                <a href="{{ route('menus.index') }}" class="btn btn-secondary">Annuler</a>
+                <button type="submit" class="btn btn-primary">Create</button>
+                <a href="{{ route('menus.index') }}" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
     </div>

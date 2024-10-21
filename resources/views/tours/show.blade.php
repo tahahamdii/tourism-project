@@ -1,11 +1,10 @@
-@extends('layouts.app')
-
-@section('content')
-    <h1>Détails de la Visite</h1>
-    <p><strong>Titre :</strong> {{ $tour->title }}</p>
-    <p><strong>Description :</strong> {{ $tour->description }}</p>
-    <p><strong>Date :</strong> {{ $tour->date }}</p>
-    <p><strong>Durée :</strong> {{ $tour->duration }} heures</p>
-    <p><strong>Prix :</strong> {{ $tour->price }} $</p>
-    <a href="{{ route('tours.index') }}">Retour à la liste des Visites</a>
-@endsection
+<x-app-layout>
+    <div class="tour-details">
+        <h1>{{ $tour->title }}</h1>
+        <p>{{ $tour->description }}</p>
+        <p>Date: {{ \Carbon\Carbon::parse($tour->date)->format('d-m-Y') }}</p>
+        <p>Duration: {{ $tour->duration }} hours</p>
+        <p>Price: {{ number_format($tour->price, 2, ',', ' ') }} €</p>
+        <p>Number of Seats: {{ $tour->nb_place }}</p>
+    </div>
+</x-app-layout>

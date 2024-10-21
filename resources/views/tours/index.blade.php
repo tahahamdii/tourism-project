@@ -1,19 +1,26 @@
 <x-app-layout :assets="$assets ?? []">
     <div class="tours-content">
-        <h1>Liste des Visites</h1>
-        <a href="{{ route('tours.create') }}" class="btn btn-primary mb-3">Ajouter une Visite</a>
+        <h1>Available Trips</h1>
 
-        <!-- Tableau pour afficher la liste des visites -->
-        <table class="table table-bordered">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <a href="{{ route('tours.create') }}" class="btn btn-primary mb-3 mt-3">Add a Trip</a>
+
+        <!-- Table to display the list of trips -->
+        <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Titre</th>
-                    <th>Description</th>  <!-- Nouvelle colonne pour la description -->
+                    <th>Name</th>
+                    <th>Description</th>
                     <th>Date</th>
-                    <th>Durée (heures)</th>  <!-- Nouvelle colonne pour la durée -->
-                    <th>Prix</th>  <!-- Nouvelle colonne pour le prix -->
-                    <th>nbPlace</th>
+                    <th>Duration (hours)</th>
+                    <th>Price (€)</th>
+                    <th>Seats Available</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -24,26 +31,31 @@
                         <td>
                             <a href="{{ route('tours.show', $tour) }}">{{ $tour->title }}</a>
                         </td>
-                        <td>{{ $tour->description }}</td>  <!-- Affichage de la description -->
+                        <td>{{ $tour->description }}</td>
                         <td>{{ \Carbon\Carbon::parse($tour->date)->format('d-m-Y') }}</td>
-                        <td>{{ $tour->duration }}</td>  <!-- Affichage de la durée -->
-                        <td>{{ number_format($tour->price, 2, ',', ' ') }} €</td>  <!-- Affichage du prix avec format -->
+                        <td>{{ $tour->duration }}</td>
+                        <td>{{ number_format($tour->price, 2, ',', ' ') }} €</td>
                         <td>{{ $tour->nb_place }}</td>
                         <td>
-                            <!-- Bouton pour modifier la visite -->
-                            <a href="{{ route('tours.edit', $tour) }}" class="btn btn-warning btn-sm">Modifier</a>
+                            <!-- Buttons for actions: update, delete, share -->
+                            <a href="{{ route('tours.edit', $tour) }}" class="btn btn-warning btn-sm">Update Trip</a>
 
-                            <!-- Formulaire pour supprimer la visite -->
-                            <form action="{{ route('tours.destroy', $tour) }}" method="POST" style="display: inline;">
+                            <form action="{{ route('tours.destroy', $tour) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this trip?');">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                                <button type="submit" class="btn btn-danger btn-sm">Delete Trip</button>
                             </form>
+
+                            <!-- Example of a social share button -->
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('tours.show', $tour->id)) }}" class="btn btn-primary btn-sm" target="_blank">Share on Facebook</a>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+
+        <!-- Pagination for large lists -->
+        {{ $tours->links() }}
     </div>
 
     <style>

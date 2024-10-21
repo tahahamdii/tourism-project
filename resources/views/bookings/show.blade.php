@@ -5,7 +5,7 @@
         <div class="card shadow-sm">
             <div class="card-body">
                 <div class="text-center mb-4">
-                    <h2>réservation pour {{ $booking->accommodation->name }}</h2> <!-- Display Accommodation Name -->
+                    <h2>Reservation for {{ $booking->accommodation->name }}</h2> <!-- Display Accommodation Name -->
                 </div>
                 <div class="row">
 
@@ -33,7 +33,7 @@
                         <div class="attribute-box">
                             <i class="fas fa-dollar-sign"></i>
                             <div>
-                                <h5>Prix total</h5>
+                                <h5>Price</h5>
                                 <p>${{ $booking->total_price }}</p>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <a href="{{ route('bookings.index') }}" class="btn btn-secondary">Retour</a>
+                    <a href="{{ route('bookings.index') }}" class="btn btn-secondary">Return </a>
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@ class TourController extends Controller
 {
     public function index()
     {
-        $tours = Tour::all();
+        $tours = Tour::paginate(10); 
         return view('tours.index', compact('tours'));
     }
 
@@ -80,6 +80,14 @@ class TourController extends Controller
         }
     }
     // TourController
+    public function show($id)
+    {
+        // Find the tour by ID or throw a 404 error if not found
+        $tour = Tour::findOrFail($id);
+
+        // Pass the tour to the view
+        return view('tours.show', compact('tour'));
+    }
 
 
 }

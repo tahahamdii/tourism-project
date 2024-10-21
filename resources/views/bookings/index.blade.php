@@ -8,10 +8,10 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Nom d'hébergement</th>
+                <th>accommodation</th>
                 <th>Check-in Date</th>
                 <th>Check-out Date</th>
-                <th>Prix total</th>
+                <th>Price </th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -27,13 +27,13 @@
                     <td>${{ $booking->total_price }}</td>
                     <td>
                         <!-- Button to edit the booking -->
-                        <a href="{{ route('bookings.edit', $booking) }}" class="btn btn-warning btn-sm">Modifier</a>
+                        <a href="{{ route('bookings.edit', $booking) }}" class="btn btn-warning btn-sm">Update</a>
 
                         <!-- Form to delete the booking -->
                         <form action="{{ route('bookings.destroy', $booking) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </td>
                 </tr>

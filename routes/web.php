@@ -46,6 +46,7 @@ Route::resource('restaurants', RestaurantController::class);
 Route::resource('menus', MenuController::class);
 Route::resource('events', EventController::class);
 Route::resource('tickets', TicketController::class);
+Route::get('/tours/{id}', [TourController::class, 'show'])->name('tours.show');
 
 // Routes for managing guide assignments to a tour
 Route::get('tours/{tour}/assign-guides', [GuideTourController::class, 'create'])->name('guides.assign');

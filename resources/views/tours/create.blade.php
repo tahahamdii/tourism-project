@@ -1,19 +1,16 @@
 <x-app-layout :assets="$assets ?? []">
     <div class="container">
-        <h1 class="text-center my-4">Ajouter une Visite</h1>
+        <h1 class="text-center my-4">Add Trip</h1>
 
         <form action="{{ route('tours.store') }}" method="POST">
             @csrf
 
             <div class="mb-3">
-                <label for="title" class="form-label">Titre</label>
+                <label for="title" class="form-label">Name</label>
                 <input type="text" name="title" id="title" class="form-control" required>
             </div>
 
-            <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea name="description" id="description" class="form-control" rows="4" required></textarea>
-            </div>
+            
 
             <div class="mb-3">
                 <label for="date" class="form-label">Date</label>
@@ -21,7 +18,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="duration" class="form-label">Durée (heures)</label>
+                <label for="duration" class="form-label">Duration (heures)</label>
                 <input type="number" name="duration" id="duration" class="form-control" required>
             </div>
 
@@ -30,14 +27,17 @@
                 <input type="number" name="price" id="price" class="form-control" required>
             </div>
             <div class="mb-3">
-                     <label for="nb_place" class="form-label">Nombre de Places</label>
+                     <label for="nb_place" class="form-label">Available Seats</label>
                     <input type="number" name="nb_place" id="nb_place" class="form-control" required>
             </div>
-
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea name="description" id="description" class="form-control" rows="4" required></textarea>
+            </div>
 
             <div class="mb-3 text-center">
-                <button type="submit" class="btn btn-primary">Ajouter</button>
-                <a href="{{ route('tours.index') }}" class="btn btn-secondary">Annuler</a>
+                <button type="submit" class="btn btn-primary">Add</button>
+                <a href="{{ route('tours.index') }}" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
     </div>

@@ -7,7 +7,7 @@
             @method('PUT')
 
             <div class="mb-3">
-                <label for="title" class="form-label">Titre de la Visite</label>
+                <label for="title" class="form-label">Name</label>
                 <input type="text" name="title" id="title" class="form-control" value="{{ old('title', $tour->title) }}" required>
                 @error('title')
                     <div class="text-danger">{{ $message }}</div>
@@ -23,7 +23,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="date" class="form-label">Date de la Visite</label>
+                <label for="date" class="form-label">Date </label>
                 <input type="date" name="date" id="date" class="form-control" value="{{ old('date', $tour->date) }}" required>
                 @error('date')
                     <div class="text-danger">{{ $message }}</div>
@@ -31,7 +31,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="duration" class="form-label">Durée (heures)</label>
+                <label for="duration" class="form-label">Duration (heures)</label>
                 <input type="number" name="duration" id="duration" class="form-control" value="{{ old('duration', $tour->duration) }}" required>
                 @error('duration')
                     <div class="text-danger">{{ $message }}</div>
@@ -39,21 +39,21 @@
             </div>
 
             <div class="mb-3">
-                <label for="price" class="form-label">Prix</label>
+                <label for="price" class="form-label">Price</label>
                 <input type="number" name="price" id="price" class="form-control" value="{{ old('price', $tour->price) }}" required>
                 @error('price')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-3">
-    <label for="nb_place" class="form-label">Nombre de Places</label>
+    <label for="nb_place" class="form-label">Seats Available</label>
     <input type="number" name="nb_place" id="nb_place" class="form-control" required>
 </div>
     
 
             <div class="text-center">
-                <button type="submit" class="btn btn-primary">Modifier la Visite</button>
-                <a href="{{ route('tours.index') }}" class="btn btn-secondary">Annuler</a>
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="{{ route('tours.index') }}" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
     </div>

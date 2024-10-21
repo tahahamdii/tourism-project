@@ -9,7 +9,7 @@
             <div class="mb-3">
                 <label for="restaurant_id" class="form-label"><strong>Restaurant:</strong></label>
                 <select name="restaurant_id" id="restaurant_id" class="form-select" required>
-                    <option value="" disabled>Sélectionnez un restaurant</option>
+                    <option value="" disabled>Select restaurant</option>
                     @foreach($restaurants as $restaurant)
                         <option value="{{ $restaurant->id }}" {{ $menu->restaurant_id == $restaurant->id ? 'selected' : '' }}>
                             {{ $restaurant->name }}
@@ -19,7 +19,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="menu_image" class="form-label"><strong>Image du Menu:</strong></label>
+                <label for="menu_image" class="form-label"><strong>Menu Image:</strong></label>
                 @if($menu->menu_image)
                     <div class="image-preview mt-3">
                         <img src="{{ asset('storage/' . $menu->menu_image) }}" alt="Menu Image" class="img-fluid img-thumbnail">
@@ -29,8 +29,8 @@
             </div>
 
             <div class="mb-3 button-group">
-                <button type="submit" class="btn btn-success">Mettre à jour</button>
-                <a href="{{ route('menus.index') }}" class="btn btn-secondary">Annuler</a>
+                <button type="submit" class="btn btn-success">Update</button>
+                <a href="{{ route('menus.index') }}" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
     </div>

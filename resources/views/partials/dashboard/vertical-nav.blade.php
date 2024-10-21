@@ -32,7 +32,7 @@
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="currentColor"></path>
                 </svg>
             </i>
-            <span class="item-name">Tours</span>
+            <span class="item-name">Trips</span>
         </a>
     </li>
     <li class="nav-item">
@@ -43,7 +43,7 @@
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="currentColor"></path>
                 </svg>
             </i>
-            <span class="item-name">Tours Guidé</span>
+            <span class="item-name">Guided Trips</span>
         </a>
     </li>
      <li class="nav-item">
@@ -64,7 +64,7 @@
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M16 11H8V13H16V11Z" fill="currentColor"></path>
             </svg>
         </i>
-        <span class="item-name">NosTickets</span>
+        <span class="item-name">Event Tickets</span>
     </a>
 </li>
  <!-- Events Link -->
@@ -76,7 +76,7 @@
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M16 11H8V13H16V11Z" fill="currentColor"></path>
             </svg>
             </i>
-            <span class="item-name">Evenements</span>
+            <span class="item-name">Events</span>
         </a>
 </li>
     <li class="nav-item">

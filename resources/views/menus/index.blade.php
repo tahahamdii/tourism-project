@@ -1,7 +1,7 @@
 <x-app-layout :assets="$assets ?? []">
     <div class="restaurant-content">
         <div class="header-section">
-            <h1>Liste des Menus</h1>
+            <h1>Menus</h1>
             <a href="{{ route('menus.create') }}" class="btn btn-primary mb-3">
                 <i class="fas fa-plus"></i> Créer un Menu
             </a>

@@ -1,7 +1,7 @@
 <x-app-layout :assets="$assets ?? []">
     <div class="tours-content">
-        <h1>Liste des Affectations de Guides</h1>
-        <a href="{{ route('guidetours.create') }}" class="btn btn-primary mb-3">Ajouter une Affectation</a>
+        <h1>Guided Trips</h1>
+        <a href="{{ route('guidetours.create') }}" class="btn btn-primary mb-3 mt-4">Add a guide to a trip</a>
 
         <table class="table table-bordered">
             <thead>
@@ -23,11 +23,11 @@
                             @endforeach
                         </td>
                         <td>
-                            <a href="{{ route('guidetours.edit', $assignment->id) }}" class="btn btn-warning btn-sm">Modifier</a>
+                            <a href="{{ route('guidetours.edit', $assignment->id) }}" class="btn btn-warning btn-sm">Update</a>
                             <form action="{{ route('guidetours.destroy', $assignment->id) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>
                         </td>
                     </tr>
