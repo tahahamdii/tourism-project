@@ -16,6 +16,16 @@ EcoTour is a Laravel-based web application focused on promoting sustainable tour
 9. [Contributing](#contributing)
 10. [License](#license)
 
+## CI/CD Pipeline (GitHub Actions)
+
+This project uses GitHub Actions for Continuous Integration (CI) and Continuous Deployment (CD). The pipeline automatically runs tests and builds the Docker image for the project when code is pushed to the repository.
+
+The GitHub Actions workflow is defined in the `.github/workflows/cicd.yml` file.
+
+### Example Workflow
+
+![CI/CD Workflow](./diag.png)
+
 ## Prerequisites
 
 Ensure you have the following tools installed before proceeding:
